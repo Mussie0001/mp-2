@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import DataFetcher from './components/CryptoData';
+import CryptoData from './components/CryptoData';
 
 const AppContainer = styled.div`
   width: 80vw;
@@ -10,12 +10,14 @@ const AppContainer = styled.div`
     font-style: italic;}
 `;
 
-export default function App() {
+function App() {
   return (
     <AppContainer>
       <h1>Live Cryptocurrency Market Data</h1>
-      <DataFetcher />    
+      <CryptoData />    
     </AppContainer>
   );
 }
+
+export default App;
 

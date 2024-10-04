@@ -29,7 +29,7 @@ const CryptoItem = styled.div<{ $rankType: string }>`
   }
 `;
 
-export default function CryptoList({ data }: { data: Crypto[] }) {
+function CryptoList({ data }: { data: Crypto[] }) {
   const sortedData = [...data].sort((a, b) => parseFloat(b.price_usd) - parseFloat(a.price_usd));
 
   return (
@@ -57,3 +57,5 @@ export default function CryptoList({ data }: { data: Crypto[] }) {
     </CryptoListContainer>
   );
 }
+
+export default CryptoList;

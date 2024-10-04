@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import CryptoList from './CryptoList';
 import { Crypto } from '../interfaces/Crypto.ts';
 
-export default function CryptoData() {
+function CryptoData() {
   const [cryptoData, setCryptoData] = useState<Crypto[]>([]);
 
   useEffect(() => {
@@ -21,5 +21,7 @@ export default function CryptoData() {
     </div>
   );
 }
+
+export default CryptoData;
 
 
