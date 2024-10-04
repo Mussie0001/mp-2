@@ -1,12 +1,32 @@
 import styled from 'styled-components';
 import { Crypto } from '../interfaces/Crypto.ts';
-import CryptoItemColored from './CryptoItemColored.tsx';
 
 const CryptoListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 20px;
+`;
+
+const CryptoItem = styled.div<{ $rankType: string }>`
+  width: 200px;
+  margin: 15px;
+  padding: 10px;
+  background-color: ${(props) =>
+    props.$rankType === 'top' ? 'green' :
+    props.$rankType === 'bottom' ? 'red' : 'yellow'};
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
 `;
 
 export default function CryptoList({ data }: { data: Crypto[] }) {
@@ -17,27 +37,23 @@ export default function CryptoList({ data }: { data: Crypto[] }) {
       {sortedData.map((crypto: Crypto, index: number) => {
         let rankType = 'middle';
 
-        // the 3 highest ranked coins
         if (index < 3) {
           rankType = 'top';
-        }
-        // the 3 lowest priced coins
-        else if (index >= sortedData.length - 3) {
+        } else if (index >= sortedData.length - 3) {
           rankType = 'bottom';
         }
 
         return (
-          <CryptoItemColored
+          <CryptoItem
             key={crypto.id}
-            id={crypto.id} 
-            name={crypto.name}
-            symbol={crypto.symbol}
-            price_usd={crypto.price_usd}
-            rankType={rankType}
-          />
+            $rankType={rankType}
+          >
+            <h2>{crypto.name}</h2>
+            <p>Symbol: {crypto.symbol}</p>
+            <p>Price: ${crypto.price_usd}</p>
+          </CryptoItem>
         );
       })}
     </CryptoListContainer>
   );
 }
-
